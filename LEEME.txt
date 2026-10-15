@@ -1,0 +1,14 @@
+EXPERIENCIA SORPRESA OTOÑAL · Archivos de la web
+================================================
+
+index.html                       La página
+bellotas.jpg                     Ilustración de las bellotas
+og.jpg                           Imagen de la vista previa en WhatsApp (1200 x 630)
+andar-por-andar-radio3.mp3       Programa de Radio 3 completo
+
+Suba los 5 archivos juntos, al mismo nivel, sin cambiar sus nombres.
+
+Si la dirección final NO es https://experiencia-sorpresa-otonal.vercel.app/
+abra index.html con un editor de texto, use "Buscar y reemplazar" y cambie
+  experiencia-sorpresa-otonal.vercel.app
+por la dirección nueva (aparece 5 veces). Así WhatsApp encontrará la imagen.
