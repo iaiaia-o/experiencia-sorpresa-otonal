@@ -56,7 +56,7 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --papel:#151922; --papel-2:#1c212c; --tinta:#ece9ee; --tinta-suave:#b0b6c5;
-    --enlace:#b3c0e3; --lavanda:#5e6c8f; --plato:#a3b0cd; --linea:rgba(236,233,238,.16);
+    --enlace:#b3c0e3; --lavanda:#5e6c8f; --plato:#a9b6d3; --linea:rgba(236,233,238,.16);
     --q1-bg:#5a3f3c; --q1-fg:#f6ecea; --q2-bg:#2e4a3f; --q2-fg:#eaf4ef;
     --q3-bg:#6c3a35; --q3-fg:#fbf0ee; --q4-bg:#2d4849; --q4-fg:#e9f2f2;
     --conf-bg:#2b3450; --conf-fg:#eef0f8;
@@ -68,7 +68,7 @@
 }
 :root[data-theme="dark"]{
   --papel:#151922; --papel-2:#1c212c; --tinta:#ece9ee; --tinta-suave:#b0b6c5;
-  --enlace:#b3c0e3; --lavanda:#5e6c8f; --plato:#a3b0cd; --linea:rgba(236,233,238,.16);
+  --enlace:#b3c0e3; --lavanda:#5e6c8f; --plato:#a9b6d3; --linea:rgba(236,233,238,.16);
   --q1-bg:#5a3f3c; --q1-fg:#f6ecea; --q2-bg:#2e4a3f; --q2-fg:#eaf4ef;
   --q3-bg:#6c3a35; --q3-fg:#fbf0ee; --q4-bg:#2d4849; --q4-fg:#e9f2f2;
   --conf-bg:#2b3450; --conf-fg:#eef0f8;
@@ -110,7 +110,7 @@ section{padding-block:clamp(56px,9vw,104px)}
 .intro p strong{color:var(--tinta);font-weight:500}
 /* Banda del mismo azul lavanda que el fondo de la ilustración; el blanco del dibujo se funde con ella */
 .plato{background:var(--plato);display:grid;place-items:center;padding-block:clamp(40px,7vw,88px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.plato img{width:min(760px,100%);height:auto;mix-blend-mode:multiply;display:block}
+.plato img{width:min(760px,100%);height:auto;display:block}
 
 /* ——— Audio ——— */
 .escucha{background:var(--papel-2)}
@@ -186,7 +186,15 @@ footer small{display:block;margin-top:10px;font-family:var(--f-titulo);text-tran
   .c4{justify-content:space-between}.c4 h3{order:0}
   .fichas{grid-template-columns:minmax(0,1fr)}
   body{font-size:17px}
+  /* Cabecera en móvil: textos en líneas cortas y centradas */
+  .bosque .eyebrow .br,.cuando span{display:block}
+  .cuando .sep{display:none}
+  .bosque .eyebrow{letter-spacing:.36em;line-height:1.7}
+  .frase{font-size:1.8rem;max-width:12ch;margin-top:16px}
+  .cuando{font-size:.85rem;line-height:1.6}
 }
+/* Halo suave del color del cielo para que el texto se lea sobre las ramas */
+.bosque .eyebrow,.frase,.cuando{text-shadow:0 0 14px var(--h-cielo-alto),0 0 4px var(--h-cielo-alto)}
 @media (prefers-reduced-motion:reduce){.viento{display:none}}
 </style>
 
@@ -195,9 +203,9 @@ footer small{display:block;margin-top:10px;font-family:var(--f-titulo);text-tran
 <header class="bosque" aria-label="Bosque de pinos y abetos mecido por el viento">
   <canvas id="bosque" aria-hidden="true"></canvas>
   <div class="wrap">
-    <span class="eyebrow">Invitación personalizada</span>
+    <span class="eyebrow">Invitación <span class="br">personalizada</span></span>
     <h1 class="frase"><em>Camino,</em> y el mundo se abre a mi medida</h1>
-    <p class="cuando">Sábado 7 de noviembre · La Pradera de Navalhorno</p>
+    <p class="cuando"><span>Sábado 7 de noviembre</span><span class="sep"> · </span><span>La Pradera de Navalhorno</span></p>
   </div>
   <button class="viento" id="viento" type="button" aria-pressed="false">Calmar el viento</button>
 </header>
@@ -213,7 +221,7 @@ footer small{display:block;margin-top:10px;font-family:var(--f-titulo);text-tran
   </section>
 
   <div class="plato">
-    <img src="bellotas.jpg" alt="Dibujo a lápiz de tres bellotas" width="900" height="513">
+    <img src="bellotas-lavanda.jpg" alt="Dibujo a lápiz de tres bellotas" width="900" height="513">
   </div>
 
   <section>
@@ -354,9 +362,11 @@ document.querySelectorAll('.copiar').forEach(b=>{
     const abetos=(n,y0,y1,h0,h1,amp)=>{const a=[];for(let i=0;i<n;i++){const h=H*(h0+r()*(h1-h0));a.push({x:(i+r()*0.9)/n*W*1.08-W*0.04,y:H*(y0+r()*(y1-y0)),h,w:h*(0.36+r()*0.12),n:7+Math.floor(r()*4),f:r()*6.28,amp})}return a.sort((p,q)=>p.y-q.y)};
     const lejos=abetos(Math.ceil(W/15),0.60,0.68,0.13,0.22,0.35);
     const medio=abetos(Math.ceil(W/42),0.80,0.92,0.30,0.46,0.65);
-    const pinos=[];const lados=W<640?[[0.02,0.12],[0.88,0.98]]:[[0.0,0.08],[0.09,0.17],[0.83,0.91],[0.92,1.0]];
-    lados.forEach(([a,b])=>{const x=W*(a+r()*(b-a));const top=H*(0.03+r()*0.16);const copa=[];const k=5+Math.floor(r()*3);
-      for(let j=0;j<k;j++){copa.push({f:0.70+0.30*(j/k)+r()*0.04,lado:j%2?1:-1,largo:H*(0.05+r()*0.08),rx:H*(0.045+r()*0.035),ry:H*(0.025+r()*0.02),f2:r()*6.28,bolas:4+Math.floor(r()*3),sem:r()})}
+    const estrecho=W<640, S=estrecho?Math.min(H,W*1.1)*0.75:H;
+    const pinos=[];const lados=estrecho?[[0.0,0.04],[0.96,1.0]]:[[0.0,0.08],[0.09,0.17],[0.83,0.91],[0.92,1.0]];
+    lados.forEach(([a,b])=>{const x=W*(a+r()*(b-a));const top=H*(0.03+r()*0.16);const copa=[];const k=5+Math.floor(r()*3);const fuera=x<W/2?-1:1;
+      for(let j=0;j<k;j++){const lado=estrecho?(j%3===2?-fuera:fuera):(j%2?1:-1);const corto=estrecho&&lado!==fuera?0.3:1;
+        copa.push({f:0.70+0.30*(j/k)+r()*0.04,lado,largo:S*(0.05+r()*0.08)*corto,rx:S*(0.045+r()*0.035),ry:S*(0.025+r()*0.02),f2:r()*6.28,bolas:4+Math.floor(r()*3),sem:r()})}
       pinos.push({x,top,gr:Math.max(7,W*0.011)*(0.8+r()*0.5),copa,f:r()*6.28})});
     capas={lejos,medio,pinos};
   }
